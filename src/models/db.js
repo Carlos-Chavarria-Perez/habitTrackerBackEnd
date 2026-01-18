@@ -7,6 +7,13 @@ const { Pool } = pkg;
 
 export const pool = new Pool({
   connectionString: process.env.SUPABASE_DB_CONNECTION_STRING,
+  ssl:{
+    rejectUnauthorized: false
+  }
+});
+
+pool.on("connect", () => {
+  console.log("Connected to the database");
 });
 
 pool.on("error", (err) => {
